@@ -1,0 +1,105 @@
+{
+  "model_name": "XGBoost predefined deployment model",
+  "purpose": "oral symptom risk-group screening support; not diagnosis",
+  "features": [
+    "gender",
+    "school",
+    "grade",
+    "income",
+    "anxiety",
+    "stress",
+    "despair",
+    "suicidal_thoughts",
+    "smartphone_use_day",
+    "smartphone_use_weekend",
+    "smartphone_dependence",
+    "sleep_quality"
+  ],
+  "target": "oral_health",
+  "threshold_rule": "highest validation threshold with weighted recall >= 0.85",
+  "screening_threshold": 0.38531652092933655,
+  "validation_metrics": {
+    "auc": 0.6406391134336152,
+    "accuracy": 0.5733597411641431,
+    "precision": 0.5492991382622597,
+    "recall": 0.8502888638503026,
+    "f1": 0.6674291855631432
+  },
+  "test_metrics": {
+    "auc": 0.644614217262283,
+    "accuracy": 0.5727253541915965,
+    "precision": 0.5480586690254319,
+    "recall": 0.8548381208320088,
+    "f1": 0.6679057876852085
+  },
+  "split": {
+    "train": 31575,
+    "validation": 10526,
+    "test": 10526,
+    "seed": 42
+  },
+  "encode_map": {
+    "gender": {
+      "Female": 0,
+      "Male": 1
+    },
+    "school": {
+      "Middle school": 0,
+      "High school": 1
+    },
+    "grade": {
+      "Low": 0,
+      "Middle": 1,
+      "High": 2
+    },
+    "income": {
+      "Low": 0,
+      "Middle": 1,
+      "High": 2
+    },
+    "anxiety": {
+      "No": 0,
+      "Mild": 1,
+      "Moderate": 2,
+      "Severe": 3
+    },
+    "stress": {
+      "Low": 0,
+      "Middle": 1,
+      "High": 2
+    },
+    "despair": {
+      "No": 0,
+      "Yes": 1
+    },
+    "suicidal_thoughts": {
+      "No": 0,
+      "Yes": 1
+    },
+    "smartphone_use_day": {
+      "≤3": 0,
+      "3 ~ 5": 1,
+      "5 ~ 8": 2,
+      "≥8": 3
+    },
+    "smartphone_use_weekend": {
+      "≤3": 0,
+      "3 ~ 5": 1,
+      "5 ~ 8": 2,
+      "≥8": 3
+    },
+    "smartphone_dependence": {
+      "No": 0,
+      "Risk": 1
+    },
+    "sleep_quality": {
+      "No": 0,
+      "Yes": 1
+    }
+  },
+  "runtime": {
+    "python": "3.11.15",
+    "scikit_learn": "1.5.0",
+    "xgboost": "3.2.0"
+  }
+}

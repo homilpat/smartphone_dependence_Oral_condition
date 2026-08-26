@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Public-use survey source files are not application artifacts.
+data/raw/*.sas7bdat
+data/processed/*.csv
+data/**/*.pdf
+
+# Legacy notebooks may contain local execution paths and embedded outputs.
+analysis_archive/notebooks_legacy/*.ipynb
+
+# Local reports and temporary exports
+reports/
+*.log
