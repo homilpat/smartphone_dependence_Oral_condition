@@ -1,3 +1,4 @@
+[시연영상](https://youtu.be/bkxu6rmWbFw)
 # Cheer Up Clinic
 
 청소년의 생활·정신건강·스마트폰 사용 정보를 바탕으로 구강 증상 위험군 선별을 돕는 Streamlit 포트폴리오입니다. 의료 진단이나 질병 발생 확률을 제공하지 않습니다.
