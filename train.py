@@ -21,8 +21,8 @@ ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "data" / "processed" / "kyrbs2020_clean_v1.csv"
 MODEL_DIR = ROOT / "models"
 FEATURES = [
-    "gender", "school", "grade", "income", "anxiety", "stress", "despair",
-    "suicidal_thoughts", "smartphone_use_day", "smartphone_use_weekend",
+    "gender", "school", "grade", "income",
+    "smartphone_use_day", "smartphone_use_weekend",
     "smartphone_dependence", "sleep_quality",
 ]
 ENCODE_MAP = {
@@ -30,10 +30,6 @@ ENCODE_MAP = {
     "school": {"Middle school": 0, "High school": 1},
     "grade": {"Low": 0, "Middle": 1, "High": 2},
     "income": {"Low": 0, "Middle": 1, "High": 2},
-    "anxiety": {"No": 0, "Mild": 1, "Moderate": 2, "Severe": 3},
-    "stress": {"Low": 0, "Middle": 1, "High": 2},
-    "despair": {"No": 0, "Yes": 1},
-    "suicidal_thoughts": {"No": 0, "Yes": 1},
     "smartphone_use_day": {"≤3": 0, "3 ~ 5": 1, "5 ~ 8": 2, "≥8": 3},
     "smartphone_use_weekend": {"≤3": 0, "3 ~ 5": 1, "5 ~ 8": 2, "≥8": 3},
     "smartphone_dependence": {"No": 0, "Risk": 1},
@@ -89,18 +85,20 @@ def main() -> None:
     )
     model.fit(x_train_s, y_train, sample_weight=w_train, verbose=False)
     threshold = threshold_for_recall(y_val, model.predict_proba(x_val_s)[:, 1], w_val)
+    train = metrics(y_train, model.predict_proba(x_train_s)[:, 1], w_train, threshold)
     validation = metrics(y_val, model.predict_proba(x_val_s)[:, 1], w_val, threshold)
     test = metrics(y_test, model.predict_proba(x_test_s)[:, 1], w_test, threshold)
     MODEL_DIR.mkdir(exist_ok=True)
     joblib.dump(model, MODEL_DIR / "xgboost_model.pkl")
     joblib.dump(scaler, MODEL_DIR / "scaler.pkl")
     report = {
-        "model_name": "XGBoost predefined deployment model",
+        "model_name": "XGBoost predefined deployment model (8 app inputs)",
         "purpose": "oral symptom risk-group screening support; not diagnosis",
         "features": FEATURES,
         "target": "oral_health",
         "threshold_rule": "highest validation threshold with weighted recall >= 0.85",
         "screening_threshold": threshold,
+        "train_metrics": train,
         "validation_metrics": validation,
         "test_metrics": test,
         "split": {"train": len(y_train), "validation": len(y_val), "test": len(y_test), "seed": SEED},

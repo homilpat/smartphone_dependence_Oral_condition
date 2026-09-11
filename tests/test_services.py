@@ -14,7 +14,7 @@ class ServiceTest(unittest.TestCase):
         model, scaler, metadata = load_ml_assets()
         self.assertIsNotNone(model)
         values = encode_answers(
-            "남학생", "고등학교", "중", "중", "보통", "중간", "아니오", "아니오",
+            "남학생", "고등학교", "중", "중",
             "3~5시간", "5~8시간", "일반군", "충분",
         )
         score = float(model.predict_proba(scaler.transform(values))[0, 1])
