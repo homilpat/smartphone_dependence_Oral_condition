@@ -67,8 +67,7 @@ def prediction_tab(model, scaler, metadata) -> None:
     smartphone_group = "위험군" if total >= 23 else "일반군"
     sleep_group = "부족" if sleep_value >= 3 else "충분"
     raw = encode_answers(
-        gender, school, grade, income, "없음", "낮음", "아니오", "아니오",
-        weekday, weekend, smartphone_group, sleep_group,
+        gender, school, grade, income, weekday, weekend, smartphone_group, sleep_group,
     )
     score = float(model.predict_proba(scaler.transform(raw))[0, 1])
     threshold = metadata["screening_threshold"]

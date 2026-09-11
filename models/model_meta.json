@@ -1,15 +1,11 @@
 {
-  "model_name": "XGBoost predefined deployment model",
+  "model_name": "XGBoost predefined deployment model (8 app inputs)",
   "purpose": "oral symptom risk-group screening support; not diagnosis",
   "features": [
     "gender",
     "school",
     "grade",
     "income",
-    "anxiety",
-    "stress",
-    "despair",
-    "suicidal_thoughts",
     "smartphone_use_day",
     "smartphone_use_weekend",
     "smartphone_dependence",
@@ -17,20 +13,27 @@
   ],
   "target": "oral_health",
   "threshold_rule": "highest validation threshold with weighted recall >= 0.85",
-  "screening_threshold": 0.38531652092933655,
+  "screening_threshold": 0.39984625577926636,
+  "train_metrics": {
+    "auc": 0.645665024407729,
+    "accuracy": 0.5668979088853666,
+    "precision": 0.5434665481260395,
+    "recall": 0.874104697787531,
+    "f1": 0.6702261550193831
+  },
   "validation_metrics": {
-    "auc": 0.6406391134336152,
-    "accuracy": 0.5733597411641431,
-    "precision": 0.5492991382622597,
-    "recall": 0.8502888638503026,
-    "f1": 0.6674291855631432
+    "auc": 0.6132665162742579,
+    "accuracy": 0.5533609627530407,
+    "precision": 0.5355682401621233,
+    "recall": 0.850030510599014,
+    "f1": 0.657115697304934
   },
   "test_metrics": {
-    "auc": 0.644614217262283,
-    "accuracy": 0.5727253541915965,
-    "precision": 0.5480586690254319,
-    "recall": 0.8548381208320088,
-    "f1": 0.6679057876852085
+    "auc": 0.6223587588223728,
+    "accuracy": 0.556156322017664,
+    "precision": 0.5364822603646294,
+    "recall": 0.8599278220930169,
+    "f1": 0.6607457616389519
   },
   "split": {
     "train": 31575,
@@ -57,25 +60,6 @@
       "Middle": 1,
       "High": 2
     },
-    "anxiety": {
-      "No": 0,
-      "Mild": 1,
-      "Moderate": 2,
-      "Severe": 3
-    },
-    "stress": {
-      "Low": 0,
-      "Middle": 1,
-      "High": 2
-    },
-    "despair": {
-      "No": 0,
-      "Yes": 1
-    },
-    "suicidal_thoughts": {
-      "No": 0,
-      "Yes": 1
-    },
     "smartphone_use_day": {
       "≤3": 0,
       "3 ~ 5": 1,
@@ -98,7 +82,7 @@
     }
   },
   "runtime": {
-    "python": "3.11.15",
+    "python": "3.11.16",
     "scikit_learn": "1.5.0",
     "xgboost": "3.2.0"
   }
